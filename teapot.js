@@ -3,7 +3,7 @@ let electricity = false;
 let temp = 15;
 let boilingProcess = false;
 let status = false;
-let cap = false;
+let capOpen = false;
 console.log(status);
 
 showInformation();
@@ -16,7 +16,7 @@ function showInformation() {
   Температура воды: ${temp} С<br>
   Электричество ${electricity ? "есть" : "нет"}<br>
   Лампочка: ${status ? "🔴" : "⚪️"}<br>
-  кришка: ${cap ? "закрыт" : "откыт"}<br>`;
+  кришка: ${capOpen ? "открит" : "закрит"}<br>`;
 }
 
 function showButtons() {
@@ -25,7 +25,7 @@ function showButtons() {
   ).innerHTML = `<br><button onclick="addWater()">Добавить воды</button><br>
   <button onclick="power()">Вкл/Выкл питание</button><br>
   <button onclick="boiling()">Вкл/Выкл кипячение</button>
- <br> <button onclick="capp()">открыт/закрыт кршку</button>`;
+ <br> <button onclick="capp()">закрит/открит кршку</button>`;
 }
 
 // 1. Подключаеться электричество
@@ -34,14 +34,16 @@ function power() {
   showInformation();
 }
 function capp() {
-  cap = !cap;
+  capOpen = !capOpen;
   showInformation();
 }
 
 // 2. Налить воду
 function addWater() {
+  if (!capOpen)
+    if (confirm("откройте кришку")) capOpen = true;
+    else return;
   water += parseInt(prompt("Укажите количество воды", 1000));
-  water += parseInt(prompt("откройте кришку"));
   showInformation();
 }
 
@@ -49,7 +51,7 @@ function addWater() {
 function boiling() {
   if (!electricity) return alert("Не работает без электричества");
   if (!water) return alert("Не работает без воды");
-  if (!cap) return alert("надо заrhакрит кришку");
+  if (!capOpen) return alert("надо закрит кришку");
   status = true;
   console.log(status);
   boilingProcess = setInterval(() => {
