@@ -25,7 +25,7 @@ function showButtons() {
   ).innerHTML = `<br><button onclick="addWater()">Добавить воды</button><br>
   <button onclick="power()">Вкл/Выкл питание</button><br>
   <button onclick="boiling()">Вкл/Выкл кипячение</button>
- <br> <button onclick="capp()">открыт/закрыт кршку</button>`;<br>
+ <br> <button onclick="capp()">открыт/закрыт кршку</button>`;
 }
 
 // 1. Подключаеться электричество
